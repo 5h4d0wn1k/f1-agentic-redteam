@@ -1,0 +1,32 @@
+# LIVE LAB TEMPLATE - three external tools against YOUR OWN lab range.
+#
+# This is a template, NOT a runnable defaults file:
+#   * The 192.0.2.0/24 range below is the RFC 5737 documentation placeholder.
+#     External adapters REFUSE to run against it - replace it with the CIDR of
+#     YOUR OWN lab and add that CIDR to config/orchestrator.yaml allowlist.
+#   * Set config external_tools.live_execution to true ONLY for your own lab.
+#   * Run interactively so the exploit and post phases can be approved.
+#
+# Example invocation after editing:
+#   f1-redteam run --campaign campaigns/lab-three-tool.yaml --execute --interactive
+id: lab-three-tool
+name: Three-tool campaign against the lab range
+description: nmap service scan, metasploit module, hashcat hash recovery - own lab only.
+targets:
+  - 192.0.2.0/24   # REPLACE with your own lab CIDR and allowlist it
+max_phases: 8
+phases:
+  - phase: recon
+    plugin: nmap-scan
+    timebox_secs: 300
+  - phase: exploit
+    plugin: metasploit-exploit
+    timebox_secs: 600
+    requires_approval: true
+  - phase: post
+    plugin: hashcat-crack
+    timebox_secs: 900
+    requires_approval: true
+  - phase: report
+    plugin: echo-findings
+    timebox_secs: 60

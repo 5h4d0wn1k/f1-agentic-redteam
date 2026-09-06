@@ -1,0 +1,4 @@
+# f1-agentic-redteam is stdlib-first: it runs with zero dependencies.
+# PyYAML is an optional convenience for full-featured YAML parsing; when it is
+# absent the built-in strict YAML-subset parser is used instead.
+PyYAML>=5.4  # optional; stdlib fallback built in

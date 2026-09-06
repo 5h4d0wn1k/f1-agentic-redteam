@@ -1,0 +1,21 @@
+# Demo: three-phase pipeline, safe offline in BOTH dry-run and --execute modes.
+# Uses only the bundled echo plugins against the RFC 5737 placeholder range.
+# The exploit phase requires approval: in non-interactive runs it aborts.
+id: demo-three-phase
+name: Demo three-phase campaign (offline echo plugins)
+description: Shows a recon/exploit/post pipeline on the research placeholder range with a security gate on the exploit phase.
+targets:
+  - 192.0.2.0/24
+max_phases: 8
+phases:
+  - phase: recon
+    plugin: recon-echo
+    timebox_secs: 15
+  - phase: exploit
+    plugin: exploit-echo
+    timebox_secs: 15
+    requires_approval: true
+  - phase: post
+    plugin: post-echo
+    timebox_secs: 15
+    requires_approval: true

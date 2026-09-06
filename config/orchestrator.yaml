@@ -1,0 +1,41 @@
+# F1 orchestrator configuration.
+#
+# ALL values below are documentation/test placeholders (RFC 5737). They are
+# NOT routable. Replace the allowlist with YOUR OWN lab CIDRs before running
+# any live --execute campaign with external tooling (nmap/msfconsole/hashcat).
+#
+# The bundled echo plugins (recon-echo, exploit-echo, post-echo, echo-findings)
+# are fully offline and safe to run in dry-run AND --execute modes against the
+# placeholder range below.
+
+allowlist:
+  note: "RFC 5737 documentation ranges - lab placeholders only, not routable"
+  cidrs:
+    - 192.0.2.0/24
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+
+plugins:
+  enabled:
+    - recon-echo
+    - exploit-echo
+    - post-echo
+    - echo-findings
+  defaults:
+    recon: recon-echo
+    exploit: exploit-echo
+    post: post-echo
+    report: echo-findings
+
+output:
+  dir: reports
+  audit_log: logs/campaign.jsonl
+  log_file: orchestrator.log
+
+logging:
+  level: INFO
+
+# External tooling (nmap, msfconsole, hashcat) is refused until this is set to
+# true. It must stay false unless you are running against YOUR OWN lab CIDRs.
+external_tools:
+  live_execution: false

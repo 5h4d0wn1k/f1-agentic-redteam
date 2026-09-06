@@ -1,0 +1,18 @@
+# Self-test campaign C: approval gate abort.
+# The post phase requires approval. In non-interactive mode the orchestrator
+# MUST abort cleanly (exit code 3) instead of auto-continuing. Used by
+# firmware.selftest and CI.
+id: selftest-gated-execute
+name: Self-test approval-gate abort
+description: Offline self-test. A gated phase in non-interactive mode aborts the campaign cleanly.
+targets:
+  - 192.0.2.0/24
+max_phases: 8
+phases:
+  - phase: recon
+    plugin: recon-echo
+    timebox_secs: 5
+  - phase: post
+    plugin: post-echo
+    timebox_secs: 5
+    requires_approval: true

@@ -1,0 +1,17 @@
+# Self-test campaign B: two-phase execute.
+# Executes recon-echo then echo-findings against the placeholder allowlist and
+# verifies findings.json, report.md and summary.csv artefacts. Used by
+# firmware.selftest and CI.
+id: selftest-two-phase-execute
+name: Self-test two-phase execute
+description: Offline self-test. Executes recon-echo + echo-findings against the placeholder range and verifies report artefacts + audit entries.
+targets:
+  - 192.0.2.0/24
+max_phases: 8
+phases:
+  - phase: recon
+    plugin: recon-echo
+    timebox_secs: 5
+  - phase: report
+    plugin: echo-findings
+    timebox_secs: 5

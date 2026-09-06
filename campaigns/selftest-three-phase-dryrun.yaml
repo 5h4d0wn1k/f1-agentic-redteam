@@ -1,0 +1,19 @@
+# Self-test campaign A: three-phase dry-run.
+# Verifies planned actions are printed and audited (executed=false) and no
+# report artefacts are produced. Used by firmware.selftest and CI.
+id: selftest-three-phase-dryrun
+name: Self-test three-phase dry-run
+description: "Offline self-test. Three phases in dry-run: recon-echo, exploit-echo, echo-findings."
+targets:
+  - 192.0.2.0/24
+max_phases: 8
+phases:
+  - phase: recon
+    plugin: recon-echo
+    timebox_secs: 5
+  - phase: exploit
+    plugin: exploit-echo
+    timebox_secs: 5
+  - phase: report
+    plugin: echo-findings
+    timebox_secs: 5

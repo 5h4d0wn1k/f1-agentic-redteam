@@ -1,4 +1,13 @@
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
 .DS_Store
+logs/
+reports/
+selftest-out/
+*.db
+*.sqlite
+*.sqlite3

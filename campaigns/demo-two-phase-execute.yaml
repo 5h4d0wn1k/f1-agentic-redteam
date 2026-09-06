@@ -1,0 +1,16 @@
+# Demo: two-phase execute campaign producing structured findings + report.
+# Fully safe: recon-echo + echo-findings are offline plugins; nothing touches
+# the network. Run with --execute to exercise the full artifact pipeline.
+id: demo-two-phase-execute
+name: Demo two-phase execute campaign (offline echo plugins)
+description: Runs recon-echo then echo-findings in --execute mode to produce findings.json, report.md and summary.csv without network contact.
+targets:
+  - 192.0.2.0/24
+max_phases: 8
+phases:
+  - phase: recon
+    plugin: recon-echo
+    timebox_secs: 15
+  - phase: report
+    plugin: echo-findings
+    timebox_secs: 15
